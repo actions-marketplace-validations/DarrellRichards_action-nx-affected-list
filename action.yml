@@ -1,4 +1,4 @@
-name: 'nx-affected-list'
+name: 'nx-affected-list-v2'
 description: 'Github action for outputting a list of affected nx projects (apps and libs)'
 inputs:
     base:
@@ -24,7 +24,7 @@ outputs:
 
 author: 'dkhunt27'
 runs:
-  using: 'node16'
+  using: 'node18'
   main: 'dist/index.js'
 
 branding:
