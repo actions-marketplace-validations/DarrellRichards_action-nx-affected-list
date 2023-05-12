@@ -52,7 +52,7 @@ function run(workspace = '.') {
             const apps = (0, nx_1.getNxAffected)({
                 base,
                 head,
-                type: 'apps',
+                type: 'app',
                 workspace: GITHUB_WORKSPACE
             });
             core.setOutput('affectedApps', apps);
@@ -139,8 +139,8 @@ const executeNxCommands = ({ commands, workspace }) => {
 function getNxAffected({ base, head, type, workspace }) {
     const args = `${base ? `--base=${base}` : ''} ${head ? `--head=${head}` : ''}`;
     const commands = [
-        `./node_modules/.bin/nx print-affected --type=${type} --plain ${args}`,
-        `nx print-affected --type=${type} --plain ${args}`
+        `./node_modules/.bin/nx print-affected --type=${type} --select=projects --plain ${args}`,
+        `nx print-affected --type=${type} --select=projects --plain ${args}`
     ];
     const result = executeNxCommands({ commands, workspace });
     if (!result) {
@@ -148,7 +148,7 @@ function getNxAffected({ base, head, type, workspace }) {
         return [];
     }
     const affected = result
-        .split(' ')
+        .split(',')
         .map(x => x.trim())
         .filter(x => x.length > 0);
     return affected || [];

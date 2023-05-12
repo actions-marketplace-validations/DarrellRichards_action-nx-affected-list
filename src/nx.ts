@@ -38,8 +38,8 @@ export function getNxAffected({
 }: GetNxAffectedProps): string[] {
   const args = `${base ? `--base=${base}` : ''} ${head ? `--head=${head}` : ''}`
   const commands = [
-    `./node_modules/.bin/nx print-affected --type=${type} --plain ${args}`,
-    `nx print-affected --type=${type} --plain ${args}`
+    `./node_modules/.bin/nx print-affected --type=${type} --select=projects --plain ${args}`,
+    `nx print-affected --type=${type} --select=projects --plain ${args}`
   ]
   const result = executeNxCommands({commands, workspace})
 
@@ -49,7 +49,7 @@ export function getNxAffected({
   }
 
   const affected = result
-    .split(' ')
+    .split(',')
     .map(x => x.trim())
     .filter(x => x.length > 0)
 
