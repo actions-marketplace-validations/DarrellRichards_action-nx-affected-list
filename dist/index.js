@@ -61,7 +61,7 @@ function run(workspace = '.') {
             const libs = (0, nx_1.getNxAffected)({
                 base,
                 head,
-                type: 'libs',
+                type: 'lib',
                 workspace: GITHUB_WORKSPACE
             });
             core.setOutput('affectedLibs', libs);
